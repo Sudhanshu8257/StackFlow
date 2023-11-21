@@ -2,11 +2,6 @@
 import {
   CreateUserParams,
   DeleteUserParams,
-  GetAllUsersParams,
-  GetSavedQuestionsParams,
-  GetUserByIdParams,
-  GetUserStatsParams,
-  ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types";
 import User from "@/database/user.model";
@@ -66,9 +61,7 @@ export async function deleteUser(params: DeleteUserParams) {
       throw new Error("User not found!");
     }
 
-    const userQuestionIds = await Question.find({ author: user._id }).distinct(
-      "_id"
-    );
+    // const userQuestionIds = await Question.find({ author: user._id }).distinct("_id");
     // Delete User Questions
     await Question.deleteMany({ author: user._id });
 
