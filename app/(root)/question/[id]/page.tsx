@@ -42,11 +42,11 @@ const Page = async ({ params, searchParams }: any) => {
             <Votes
               type="Question"
               itemId={JSON.stringify(questionResult._id)}
-              userId={JSON.stringify(mongoUser._id)}
+              userId={JSON.stringify(mongoUser?._id)}
               upvotes={questionResult.upvotes.length}
-              hasupVoted={questionResult.upvotes.includes(mongoUser._id)}
+              hasupVoted={questionResult.upvotes.includes(mongoUser?._id)}
               downvotes={questionResult.downvotes.length}
-              hasdownVoted={questionResult.downvotes.includes(mongoUser._id)}
+              hasdownVoted={questionResult.downvotes.includes(mongoUser?._id)}
               hasSaved={mongoUser?.saved.includes(questionResult._id)}
             />
           </div>
@@ -93,14 +93,14 @@ const Page = async ({ params, searchParams }: any) => {
       </div>
       <AllAnswers
         questionId={questionResult._id}
-        userId={mongoUser._id}
+        userId={mongoUser?._id}
         totalAnswers={questionResult.answers.length}
         filter={searchParams?.filter}
       />
       <Answer
         question={questionResult.content}
         questionId={JSON.stringify(questionResult._id)}
-        authorId={JSON.stringify(mongoUser._id)}
+        authorId={JSON.stringify(mongoUser?._id)}
       />
     </>
   );
