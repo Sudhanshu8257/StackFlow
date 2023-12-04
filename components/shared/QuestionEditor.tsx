@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { useTheme } from "@/context/ThemeProvider";
 
-export default function QuestionEditor({ field }: any) {
+export default function QuestionEditor({ field, initial }: any) {
   const editorRef = useRef(null);
+  const { mode } = useTheme();
+
   return (
     <>
       <Editor
@@ -11,7 +14,7 @@ export default function QuestionEditor({ field }: any) {
           // @ts-ignore
           editorRef.current = editor;
         }}
-        initialValue=""
+        initialValue={initial}
         onBlur={field?.onBlur}
         onEditorChange={(content) => {
           field?.onChange(content);
@@ -41,6 +44,8 @@ export default function QuestionEditor({ field }: any) {
             "codesample | bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist",
           content_style: "body { font-family:Inter; font-size:16px }",
+          skin: mode === "dark" ? "oxide-dark" : "oxide",
+          content_css: mode === "dark" ? "dark" : "light",
         }}
       />
     </>
